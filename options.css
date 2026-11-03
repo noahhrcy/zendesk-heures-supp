@@ -1,0 +1,65 @@
+.hero { padding: 26px 24px 64px; }
+.hero-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hero h1 { font-size: 24px; letter-spacing: -.02em; }
+.hero-sub { font-size: 15px; margin-top: 2px; }
+.logo-clock.big { width: 52px; height: 52px; border-radius: 16px; }
+.logo-clock.big svg { width: 32px; height: 32px; }
+.hero-stats { display: flex; gap: 10px; }
+.hero-stats > div {
+  display: grid; gap: 1px; padding: 8px 14px; border-radius: 12px; min-width: 110px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(4px);
+}
+.hero-stats span { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: rgba(255, 255, 255, .7); }
+.hero-stats strong { font-size: 20px; font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; }
+.hero-stats > div:last-child strong { color: var(--turquoise); }
+
+.page { max-width: 880px; margin: -40px auto 0; padding: 0 16px 48px; display: grid; gap: 16px; position: relative; }
+.card { display: grid; gap: 12px; padding: 18px 20px; }
+.card h2.title.sep { margin-top: 12px; justify-self: start; }
+.card > h2.title { justify-self: start; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.grid2 .field input, .grid2 .field select { width: 100%; }
+fieldset { border: 1.5px solid var(--border); border-radius: 11px; padding: 8px 12px 12px; margin: 0; }
+legend { font-weight: 700; padding: 0 4px; }
+.days label {
+  display: inline-flex; gap: 6px; align-items: center; padding: 5px 12px; border: 1.5px solid var(--border);
+  border-radius: 999px; cursor: pointer; font-weight: 700; user-select: none;
+  transition: background-color .15s, border-color .15s, color .15s, transform .15s var(--spring);
+}
+.days label:active { transform: scale(.94); }
+.days label input { accent-color: var(--cyan); }
+.days label:has(input:checked) { border-color: var(--cyan); background: var(--info-soft); color: var(--sky); }
+.status { font-weight: 700; }
+.status.on { color: var(--violet); }
+.status.ok { color: var(--success); }
+.status.warn { color: var(--warn); }
+.error { color: var(--danger); font-weight: 700; }
+.save-row { margin-top: 4px; }
+#save .ok-ico { display: none; }
+#save.saved { background: var(--success-strong); color: #fff; box-shadow: none; }
+#save.saved .ok-ico { display: inline; }
+html[data-anim="on"] #save.saved .ok-ico path { stroke-dasharray: 20; animation: draw .4s var(--ease) both; --len: 20; }
+.tools { gap: 8px; }
+.adjust { border: 1.5px dashed var(--border); border-radius: 11px; padding: 12px; display: grid; gap: 8px; }
+html[data-anim="on"] .adjust:not(.hidden) { animation: slide-down .3s var(--ease) backwards; }
+
+.update-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.update-grid > div { display: grid; gap: 2px; padding: 10px 12px; border-radius: 11px; background: var(--surface-2); border: 1px solid var(--border); }
+.update-grid strong { font-size: 16px; font-weight: 800; }
+.steps { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.steps code { font-family: Consolas, "Cascadia Mono", monospace; font-size: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; overflow-wrap: anywhere; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 11px; }
+table.history { width: 100%; border-collapse: collapse; }
+table.history th, table.history td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+table.history tbody tr:last-child td { border-bottom: none; }
+table.history th { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; background: var(--surface-2); }
+table.history tbody tr { transition: background-color .15s; }
+table.history tbody tr:hover { background: var(--surface-2); }
+table.history td.num, table.history th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+table.history td.date { white-space: nowrap; }
+table.history .neg { color: var(--danger); font-weight: 800; }
+table.history .pos { color: var(--success); font-weight: 800; }
+html[data-anim="on"] table.history tbody tr { animation: fade-in .3s var(--ease) backwards; animation-delay: calc(min(var(--i, 0), 20) * 25ms); }
+.danger-zone { border-top: 1px solid var(--border); padding-top: 12px; }
+html[data-anim="on"] .hero .logo-clock { animation: float 3.4s ease-in-out 1.4s infinite; }

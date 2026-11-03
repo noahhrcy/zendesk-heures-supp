@@ -1,0 +1,57 @@
+body { min-height: 100vh; display: flex; flex-direction: column; }
+.hero { padding: 18px 18px 30px; }
+.hero-row { display: flex; align-items: center; gap: 12px; }
+.hero-row .grow { flex: 1; min-width: 0; }
+.hero h1 { font-size: 18px; }
+.hero-sub { font-size: 13px; margin-top: 1px; }
+
+.prompt { flex: 1; padding: 0 16px 16px; display: flex; flex-direction: column; gap: 12px; margin-top: -16px; }
+#question { display: grid; gap: 12px; }
+html[data-anim="on"] .bump-soft { animation: fade-up .35s var(--ease) backwards; }
+.ticket { position: relative; }
+.ticket .ticket-id { font-size: 15px; font-weight: 800; text-decoration: none; color: var(--text); }
+.ticket a.ticket-id[href] { color: var(--link); }
+.ticket a.ticket-id[href]:hover { text-decoration: underline; }
+.ticket .subject { font-weight: 700; margin-top: 4px; overflow-wrap: anywhere; }
+.facts { list-style: none; margin: 10px 0 0; padding: 10px 0 0; display: grid; gap: 6px; border-top: 1px dashed var(--border); }
+.facts li { display: flex; gap: 8px; align-items: flex-start; }
+.facts .ico { width: 18px; height: 18px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--info-soft); }
+.facts .ico.ok { background: var(--success-soft); }
+.facts .ico svg { width: 11px; height: 11px; fill: none; stroke: var(--sky); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.facts .ico.ok svg { stroke: var(--success); }
+
+.question { font-weight: 800; font-size: 14.5px; margin-bottom: 14px; text-align: center; }
+.dur-wrap { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.dur-wrap .duration .num { width: 78px; font-size: 28px; min-height: 52px; border-radius: 12px; color: var(--text); }
+.dur-wrap .duration .unit { font-size: 14px; }
+.step {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--surface);
+  font-size: 22px; line-height: 1; cursor: pointer; font-weight: 800; color: var(--text);
+  transition: transform .15s var(--spring), border-color .15s, color .15s, background-color .15s;
+}
+.step:hover { border-color: var(--cyan); color: var(--sky); background: var(--info-soft); }
+.step:active { transform: scale(.88); }
+.step:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+.chips { justify-content: center; margin: 14px 0 8px; gap: 6px; }
+#suggestion { text-align: center; min-height: 18px; }
+#suggestion .link { font-size: 12px; }
+.note { margin-top: 12px; }
+.actions { display: grid; gap: 8px; }
+.actions .row { margin-top: 2px; }
+footer { margin-top: auto; text-align: center; padding-top: 4px; }
+
+/* écran « Enregistré » */
+.done {
+  position: fixed; inset: 0; z-index: 40; display: grid; place-content: center; justify-items: center; gap: 12px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(3px);
+  font-weight: 800; font-size: 16px; color: var(--text);
+}
+.done svg { width: 76px; height: 76px; }
+.done circle { fill: none; stroke: var(--turquoise); stroke-width: 3.5; }
+.done path { fill: none; stroke: var(--cyan); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+html[data-anim="on"] .done { animation: fade-in .2s ease both; }
+html[data-anim="on"] .done circle { stroke-dasharray: 100; animation: draw .55s var(--ease) both; --len: 100; }
+html[data-anim="on"] .done path { stroke-dasharray: 100; animation: draw .4s var(--ease) .35s both; --len: 100; }
+html[data-anim="on"] .done p { animation: fade-up .4s var(--ease) .45s both; }
+html[data-anim="on"] .hero .logo-clock { animation: float 3.2s ease-in-out 1.4s infinite; }

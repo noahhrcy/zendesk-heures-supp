@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Heures supp Zendesk",
+  "short_name": "Heures supp",
+  "version": "1.0.0",
+  "description": "Propose d'enregistrer vos heures supp quand vous résolvez un ticket Zendesk hors horaires, tient le solde et prépare le mail de déclaration.",
+  "minimum_chrome_version": "116",
+  "homepage_url": "https://github.com/noahhrcy/zendesk-heures-supp",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Heures supp",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "alarms", "notifications", "downloads", "downloads.open", "scripting"],
+  "host_permissions": ["https://*.zendesk.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.zendesk.com/agent*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

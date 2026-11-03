@@ -1,0 +1,7 @@
+{
+  "recipientEmail": "prenom.nom@entreprise.fr",
+  "recipientName": "Prénom",
+  "senderName": "Prénom NOM",
+  "mailMethod": "eml",
+  "testModeUntil": "2026-01-31T23:59:59"
+}

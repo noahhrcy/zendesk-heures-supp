@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr" data-anim="on">
+<head>
+  <meta charset="utf-8">
+  <title>Heures supp ?</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="prompt.css">
+</head>
+<body>
+  <header class="hero">
+    <svg class="waves" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 78 C100 46 220 112 400 78 C500 46 620 112 800 78 L800 140 L0 140 Z"/>
+      <path d="M0 98 C130 70 270 128 400 98 C530 70 670 128 800 98 L800 140 L0 140 Z"/>
+      <path d="M0 116 C90 102 300 136 400 116 C490 102 700 136 800 116 L800 140 L0 140 Z"/>
+    </svg>
+    <div class="hero-row">
+      <span class="logo-clock" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle class="face" cx="12" cy="12" r="9.5"/><path class="hand hour" d="M12 12V7.2"/><path class="hand min" d="M12 12l4.2 2.4"/><circle class="dot" cx="12" cy="12" r="1.6"/></svg>
+      </span>
+      <div class="grow">
+        <h1>Heures supplémentaires ?</h1>
+        <p class="hero-sub" id="hero-sub">Ticket résolu hors horaires</p>
+      </div>
+      <span id="counter" class="tag navy hidden"></span>
+    </div>
+  </header>
+
+  <main id="app" class="prompt">
+    <div id="preview-banner" class="banner violet hidden reveal"><p class="grow"><strong>Aperçu</strong> — rien ne sera enregistré.</p></div>
+
+    <section id="empty" class="card hidden reveal">
+      <p>Aucune résolution en attente.</p>
+      <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" id="close-empty">Fermer</button></div>
+    </section>
+
+    <section id="question" class="hidden">
+      <div class="card ticket reveal">
+        <div class="row">
+          <a id="t-link" class="ticket-id" target="_blank" rel="noopener"></a>
+          <span id="t-test" class="tag test hidden">Mode test</span>
+        </div>
+        <p id="t-subject" class="subject"></p>
+        <p id="t-client" class="muted small"></p>
+        <ul class="facts">
+          <li><span class="ico ok" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" /></svg></span><span id="t-resolved"></span></li>
+          <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5.2 2.5l1.6 3-1.3 1.2a7.5 7.5 0 0 0 3.8 3.8l1.2-1.3 3 1.6-.6 2.4c-5.2.6-10.2-4.4-9.6-9.6z"/></svg></span><span id="t-ref"></span></li>
+        </ul>
+      </div>
+
+      <div class="card picker reveal">
+        <p class="question">Avez-vous fait des heures supp sur ce ticket ?</p>
+        <div class="dur-wrap">
+          <button class="step" id="minus" type="button" aria-label="Retirer 5 minutes">−</button>
+          <div id="duration"></div>
+          <button class="step" id="plus" type="button" aria-label="Ajouter 5 minutes">+</button>
+        </div>
+        <div class="row wrap chips">
+          <button class="chip" data-add="-15" type="button">−15 min</button>
+          <button class="chip" data-add="15" type="button">+15 min</button>
+          <button class="chip" data-add="30" type="button">+30 min</button>
+          <button class="chip" data-add="60" type="button">+1 h</button>
+          <button class="chip" data-set="0" type="button">0</button>
+        </div>
+        <p id="suggestion" class="muted small"></p>
+        <label class="field note">
+          <span>Commentaire <span class="muted">(facultatif)</span></span>
+          <input type="text" id="note" maxlength="300" placeholder="Ex. : rappel du client après 17h" style="width:100%">
+        </label>
+      </div>
+
+      <div class="actions reveal">
+        <button class="btn primary big block" id="yes" type="button"></button>
+        <button class="btn big block caps" id="no" type="button">Non, pas d’heures supp</button>
+        <div class="row small">
+          <button class="link muted" id="later" type="button">Plus tard</button>
+          <span class="spacer"></span>
+          <button class="link muted" id="not-solved" type="button">Le ticket n’a pas été résolu</button>
+        </div>
+      </div>
+    </section>
+
+    <footer id="totals" class="muted small reveal"></footer>
+  </main>
+
+  <div id="done" class="done hidden" role="status" aria-live="polite">
+    <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23" pathLength="100"/><path d="M15 27l7.5 7.5L38 18" pathLength="100"/></svg>
+    <p id="done-text">Enregistré</p>
+  </div>
+  <script type="module" src="prompt.js"></script>
+</body>
+</html>

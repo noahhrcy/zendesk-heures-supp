@@ -1,0 +1,3 @@
+# Réglages propres au poste (destinataire, nom…) : jamais publiés.
+config.local.json
+*.log

@@ -1,0 +1,3 @@
+# Les .bat doivent garder leurs fins de ligne Windows (CRLF), y compris dans
+# les archives ZIP téléchargées depuis GitHub.
+*.bat -text

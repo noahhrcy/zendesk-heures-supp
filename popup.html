@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr" data-anim="on">
+<head>
+  <meta charset="utf-8">
+  <title>Heures supp</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="popup">
+  <header class="hero">
+    <svg class="waves" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 78 C100 46 220 112 400 78 C500 46 620 112 800 78 L800 140 L0 140 Z"/>
+      <path d="M0 98 C130 70 270 128 400 98 C530 70 670 128 800 98 L800 140 L0 140 Z"/>
+      <path d="M0 116 C90 102 300 136 400 116 C490 102 700 136 800 116 L800 140 L0 140 Z"/>
+    </svg>
+    <div class="hero-row">
+      <span class="logo-clock" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle class="face" cx="12" cy="12" r="9.5"/><path class="hand hour" d="M12 12V7.2"/><path class="hand min" d="M12 12l4.2 2.4"/><circle class="dot" cx="12" cy="12" r="1.6"/></svg>
+      </span>
+      <div class="grow">
+        <h1>Heures supp</h1>
+        <p class="hero-sub" id="hero-sub"></p>
+      </div>
+      <button class="icon-btn" id="open-options" title="Réglages et historique complet" aria-label="Réglages">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.5 7.5 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.5 7.5 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.5 7.5 0 0 0 1.7 1l.3 2.6h4l.4-2.6a7.5 7.5 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="tiles reveal">
+      <div class="tile accent">
+        <span class="label">Non déclarées au chef</span>
+        <strong id="undeclared" class="value">0 min</strong>
+        <span id="undeclared-sub" class="muted small"></span>
+      </div>
+      <div class="tile">
+        <span class="label">Solde d’heures supp</span>
+        <strong id="balance" class="value">0 min</strong>
+        <span id="balance-sub" class="muted small"></span>
+      </div>
+    </section>
+
+    <div id="update-banner" class="banner info anim-in hidden">
+      <p class="grow small"><strong>Mise à jour disponible</strong> : version <span id="update-latest"></span> (vous avez la <span id="update-current"></span>).</p>
+      <button class="link small" id="update-how" type="button">Installer</button>
+    </div>
+
+    <div id="updated-banner" class="banner ok anim-in hidden">
+      <p class="grow small">Extension mise à jour en version <strong id="updated-to"></strong>.</p>
+      <button class="link small" id="updated-ok" type="button">OK</button>
+    </div>
+
+    <div id="test-banner" class="banner violet anim-in hidden">
+      <p class="grow small"><span class="tag test">Mode test</span> jusqu’à <strong id="test-until"></strong> : toute résolution compte comme hors horaires.</p>
+      <button class="link small" id="test-off" type="button">Désactiver</button>
+    </div>
+
+    <div id="pending-banner" class="banner warn anim-in hidden">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <p class="grow"><strong id="pending-text"></strong><br><span class="small muted">Résolution(s) hors horaires sans réponse.</span></p>
+      <button class="btn navy" id="pending-open" type="button">Répondre</button>
+    </div>
+
+    <button class="btn primary big block reveal" id="send" type="button">
+      <svg class="plane" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3.4 20.4 21.9 12 3.4 3.6l-.1 6.5L16 12 3.3 13.9z"/></svg>
+      <span id="send-label">Envoyer au chef</span>
+    </button>
+
+    <div id="mail-banner" class="banner info anim-in hidden">
+      <div class="grow">
+        <p><strong>Mail préparé</strong> <span id="mail-when" class="muted small"></span></p>
+        <p class="small" id="mail-text"></p>
+        <div class="row wrap mail-actions">
+          <button class="btn success" id="mail-done" type="button">C’est envoyé : marquer comme déclarées</button>
+          <button class="btn hidden" id="mail-open" type="button">Ouvrir dans Outlook</button>
+          <button class="link small" id="mail-again" type="button">Recréer le mail</button>
+          <button class="link small" id="mail-copy" type="button">Copier le tableau</button>
+          <button class="link small muted" id="mail-cancel" type="button">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="card reveal">
+      <div class="row head">
+        <h2 class="title">À déclarer<svg class="swoosh" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M1 6 C 28 1.5, 70 1, 99 4" pathLength="100" vector-effect="non-scaling-stroke"/></svg></h2>
+        <span class="spacer"></span>
+        <button class="link small hidden" id="delete-tests" type="button"></button>
+      </div>
+      <ul id="undeclared-list" class="list"></ul>
+    </section>
+
+    <section class="card reveal">
+      <div class="row two">
+        <button class="btn" id="add-toggle" type="button" aria-expanded="false"><span class="sign plus">+</span> Ajouter des heures</button>
+        <button class="btn" id="use-toggle" type="button" aria-expanded="false"><span class="sign minus">−</span> Utiliser des heures</button>
+      </div>
+
+      <form id="add-form" class="mini-form hidden" novalidate>
+        <p class="small muted">Heures supp faites en dehors d’une résolution détectée.</p>
+        <div class="row wrap"><span class="lbl">Durée</span><div data-slot="duration"></div></div>
+        <label class="field"><span>Date et heure</span><input type="datetime-local" name="at" required></label>
+        <label class="field"><span>N° de ticket <span class="muted">(facultatif)</span></span><input type="text" name="ticket" inputmode="numeric" placeholder="123456"></label>
+        <label class="field"><span>Commentaire <span class="muted">(facultatif)</span></span><input type="text" name="note" maxlength="300"></label>
+        <div class="row"><span class="spacer"></span><button class="btn" type="button" data-cancel>Annuler</button><button class="btn primary" type="submit">Ajouter</button></div>
+      </form>
+
+      <form id="use-form" class="mini-form hidden" novalidate>
+        <p class="small muted">Temps récupéré : départ plus tôt, arrivée plus tard… Il est retiré du solde.</p>
+        <div class="row wrap"><span class="lbl">Durée</span><div data-slot="duration"></div></div>
+        <label class="field"><span>Date</span><input type="datetime-local" name="at" required></label>
+        <label class="field"><span>Motif</span>
+          <select name="reason">
+            <option>Départ plus tôt</option>
+            <option>Arrivée plus tard</option>
+            <option>Pause plus longue</option>
+            <option>Absence</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <label class="field"><span>Commentaire <span class="muted">(facultatif)</span></span><input type="text" name="note" maxlength="300"></label>
+        <div class="row"><span class="spacer"></span><button class="btn" type="button" data-cancel>Annuler</button><button class="btn primary" type="submit">Retirer du solde</button></div>
+      </form>
+    </section>
+
+    <section class="card reveal">
+      <div class="row head">
+        <h2 class="title">Derniers mouvements<svg class="swoosh" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M1 6 C 28 1.5, 70 1, 99 4" pathLength="100" vector-effect="non-scaling-stroke"/></svg></h2>
+        <span class="spacer"></span>
+        <button class="link small" id="all-history" type="button">Tout l’historique</button>
+      </div>
+      <ul id="history" class="list"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
